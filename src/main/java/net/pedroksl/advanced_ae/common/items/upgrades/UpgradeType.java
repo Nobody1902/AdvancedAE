@@ -99,6 +99,7 @@ public enum UpgradeType {
     WORKBENCH("Portable Workbench", null, SettingType.NONE, 0, ApplicationType.PASSIVE_USE, AAEItems.WORKBENCH_CARD),
     PICK_CRAFT("Pick-Craft", null, SettingType.NONE, 1000, ApplicationType.PASSIVE_USE, AAEItems.PICK_CRAFT_CARD),
     CAMO("Camo", null, SettingType.NONE, 0, ApplicationType.PASSIVE, AAEItems.CAMO_CARD),
+    // HUD("HUD", null, SettingType.BOOL_LIST, 10, ApplicationType.PASSIVE, AAEItems.HUD_CARD),
     AUTO_FLUID(
             "Auto Fluid",
             UpgradeCards::autoFluid,
