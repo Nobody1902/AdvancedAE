@@ -169,8 +169,8 @@ public class AAEItems extends ItemRegistry {
             item("Pick Craft Card", "pick_craft_card", p -> new QuantumUpgradeBaseItem(UpgradeType.PICK_CRAFT, p));
     public static final ItemDefinition<QuantumUpgradeBaseItem> CAMO_CARD =
             item("Camo Card", "camo_card", p -> new QuantumUpgradeBaseItem(UpgradeType.CAMO, p));
-    //    public static final ItemDefinition<QuantumUpgradeBaseItem> HUD_CARD =
-    //            item("HUD Card", "hud_card", p -> new QuantumUpgradeBaseItem(UpgradeType.HUD, p));
+    public static final ItemDefinition<QuantumUpgradeBaseItem> AUTO_FLUID_CARD =
+            item("Auto Fluid Card", "auto_fluid_card", p -> new QuantumUpgradeBaseItem(UpgradeType.AUTO_FLUID, p));
 
     protected static <T extends Item> ItemDefinition<T> item(
             String englishName, String id, Function<Item.Properties, T> factory) {

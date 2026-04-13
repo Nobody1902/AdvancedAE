@@ -18,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.pedroksl.advanced_ae.common.definitions.AAEComponents;
 import net.pedroksl.advanced_ae.common.definitions.AAEConfig;
 import net.pedroksl.advanced_ae.common.helpers.MagnetHelpers;
@@ -32,6 +34,7 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.stacks.AEItemKey;
+import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.GenericStack;
 
 public class UpgradeCards {
@@ -379,5 +382,75 @@ public class UpgradeCards {
                 energyService.injectPower(extracted - inserted, Actionable.MODULATE);
             }
         }
+    }
+
+    public static boolean autoFluid(Level level, Player player, ItemStack stack) {
+        if (!(stack.getItem() instanceof QuantumHelmet helmet)
+                || !helmet.isUpgradeEnabledAndPowered(stack, UpgradeType.AUTO_FLUID)
+                || helmet.getLinkedPosition(stack) == null) {
+            return false;
+        }
+
+        if (player.containerMenu != null && !player.containerMenu.getCarried().isEmpty()) {
+            return false;
+        }
+
+        MutableObject<Component> errorHolder = new MutableObject<>();
+        IGrid grid = helmet.getLinkedGrid(stack, level, errorHolder::setValue);
+        if (grid == null) return false;
+
+        var storageService = grid.getStorageService();
+        var cachedInventory = storageService.getCachedInventory();
+
+        boolean didSomething = false;
+
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            var itemStack = player.getInventory().getItem(i);
+            if (itemStack.isEmpty()) continue;
+
+            var fluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM, null);
+            if (fluidHandler == null) continue;
+
+            int tankCount = fluidHandler.getTanks();
+            for (int tank = 0; tank < tankCount; tank++) {
+                var fluidInTank = fluidHandler.getFluidInTank(tank);
+                if (fluidInTank.isEmpty()) continue;
+
+                int capacity = fluidHandler.getTankCapacity(tank);
+                int space = capacity - (int) fluidInTank.getAmount();
+                if (space <= 0) continue;
+
+                var fluidKey = AEFluidKey.of(fluidInTank.getFluid());
+                if (fluidKey == null) continue;
+
+                var available = cachedInventory.get(fluidKey);
+                long toExtract = Math.min(available, space);
+                if (toExtract <= 0) continue;
+
+                var extracted = storageService.getInventory().extract(
+                        fluidKey,
+                        toExtract,
+                        Actionable.MODULATE,
+                        IActionSource.ofPlayer(player));
+
+                if (extracted > 0) {
+                    var fluidStack = fluidKey.toStack((int) extracted);
+                    int filled = fluidHandler.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
+                    if (filled > 0) {
+                        didSomething = true;
+
+                        if (extracted > filled) {
+                            storageService.getInventory().insert(
+                                    fluidKey,
+                                    extracted - filled,
+                                    Actionable.MODULATE,
+                                    IActionSource.ofPlayer(player));
+                        }
+                    }
+                }
+            }
+        }
+
+        return didSomething;
     }
 }

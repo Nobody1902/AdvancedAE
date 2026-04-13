@@ -42,7 +42,8 @@ public class QuantumHelmet extends QuantumArmorBase {
                 UpgradeType.NIGHT_VISION,
                 UpgradeType.CHARGING,
                 UpgradeType.WORKBENCH,
-                UpgradeType.CAMO);
+                UpgradeType.CAMO,
+                UpgradeType.AUTO_FLUID);
     }
 
     @Override

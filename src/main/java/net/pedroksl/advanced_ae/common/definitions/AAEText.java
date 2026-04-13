@@ -136,6 +136,7 @@ public enum AAEText implements LocalizationEnum {
             Type.TOOLTIP),
     CamoTooltip("Toggles the visibility of the upgraded armor piece.", Type.TOOLTIP),
     HudTooltip("Adds a HUD with configurable safety checks and information about the ME System.", Type.TOOLTIP),
+    AutoFluidTooltip("Configurable to import fluids from the ME System to compatible items.", Type.TOOLTIP),
 
     InsufficientPower("Insufficient Power", Type.TOOLTIP),
     InsufficientPowerDetails(
