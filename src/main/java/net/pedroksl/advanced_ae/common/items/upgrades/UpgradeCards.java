@@ -16,7 +16,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.pedroksl.advanced_ae.common.definitions.AAEConfig;
 import net.pedroksl.advanced_ae.common.helpers.MagnetHelpers;
 import net.pedroksl.advanced_ae.common.items.armors.*;
@@ -29,8 +31,12 @@ import appeng.api.config.PowerMultiplier;
 import appeng.api.networking.IGrid;
 import appeng.api.networking.energy.IEnergyService;
 import appeng.api.networking.security.IActionSource;
-import appeng.api.stacks.AEFluidKey;
 import appeng.api.stacks.AEItemKey;
+import appeng.api.networking.storage.IStorageService;
+import appeng.api.stacks.AEFluidKey;
+import appeng.api.stacks.GenericStack;
+import appeng.api.storage.MEStorage;
+import appeng.api.storage.StorageHelper;
 
 public class UpgradeCards {
 
@@ -449,9 +455,11 @@ public class UpgradeCards {
                 long toExtract = Math.min(available, space);
                 if (toExtract <= 0) continue;
 
-                var extracted = storageService
-                        .getInventory()
-                        .extract(fluidKey, toExtract, Actionable.MODULATE, IActionSource.ofPlayer(player));
+                var extracted = storageService.getInventory().extract(
+                        fluidKey,
+                        toExtract,
+                        Actionable.MODULATE,
+                        IActionSource.ofPlayer(player));
 
                 if (extracted > 0) {
                     var fluidStack = fluidKey.toStack((int) extracted);
@@ -460,13 +468,11 @@ public class UpgradeCards {
                         didSomething = true;
 
                         if (extracted > filled) {
-                            storageService
-                                    .getInventory()
-                                    .insert(
-                                            fluidKey,
-                                            extracted - filled,
-                                            Actionable.MODULATE,
-                                            IActionSource.ofPlayer(player));
+                            storageService.getInventory().insert(
+                                    fluidKey,
+                                    extracted - filled,
+                                    Actionable.MODULATE,
+                                    IActionSource.ofPlayer(player));
                         }
                     }
                 }
