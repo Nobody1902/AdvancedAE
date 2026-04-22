@@ -80,7 +80,8 @@ public class PortableCellWorkbenchMenuHost extends ItemMenuHost
             var c = this.getCellConfigInventory();
             if (c != null) {
                 copy(this.config, c);
-                // Copy items back. The cell may change the items on insert, for example if a fluid tank gets turned
+                // Copy items back. The cell may change the items on insert, for example if a fluid tank
+                // gets turned
                 // into a dummy fluid item.
                 copy(c, this.config);
             }
@@ -151,7 +152,8 @@ public class PortableCellWorkbenchMenuHost extends ItemMenuHost
                     } else {
                         // Copy config inventory -> cell, when cell's config is empty
                         copy(this.config, configInventory);
-                        // Copy items back. The cell may change the items on insert, for example if a fluid tank gets
+                        // Copy items back. The cell may change the items on insert, for example if a fluid tank
+                        // gets
                         // turned
                         // into a dummy fluid item.
                         copy(configInventory, this.config);

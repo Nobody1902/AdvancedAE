@@ -10,8 +10,9 @@ import net.pedroksl.advanced_ae.client.gui.QuantumCrafterTermScreen;
 import net.pedroksl.ae2addonlib.network.AddonPacket;
 
 /**
- * Sends the content for a single {@link net.pedroksl.advanced_ae.common.helpers.AutoCraftingContainer} shown in the
- * quantum crafter terminal to the client.
+ * Sends the content for a single {@link
+ * net.pedroksl.advanced_ae.common.helpers.AutoCraftingContainer} shown in the quantum crafter
+ * terminal to the client.
  */
 public class QuantumCrafterTerminalPacket extends AddonPacket {
 

@@ -331,8 +331,8 @@ public class AdvCraftingBlockEntity extends AENetworkBlockEntity
     }
 
     /**
-     * When the block state changes (i.e. becoming formed or unformed), we need to update the model data since it
-     * contains connections to neighboring block entities.
+     * When the block state changes (i.e. becoming formed or unformed), we need to update the model
+     * data since it contains connections to neighboring block entities.
      */
     @Override
     public void setBlockState(BlockState state) {

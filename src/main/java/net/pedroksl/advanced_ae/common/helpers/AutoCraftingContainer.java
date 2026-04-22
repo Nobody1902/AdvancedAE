@@ -14,15 +14,13 @@ import appeng.menu.locator.MenuLocator;
 
 public interface AutoCraftingContainer {
     /**
-     * Get the grid the container is currently connected to. Used to track if the container disconnects, so it can be
-     * removed from the terminal.
+     * Get the grid the container is currently connected to. Used to track if the container
+     * disconnects, so it can be removed from the terminal.
      */
     @Nullable
     IGrid getGrid();
 
-    /**
-     * Get the locator of the attached block entity. Used to change pattern configurations.
-     */
+    /** Get the locator of the attached block entity. Used to change pattern configurations. */
     @Nullable
     MenuLocator getLocator();
 

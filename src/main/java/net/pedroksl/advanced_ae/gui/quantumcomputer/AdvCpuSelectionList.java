@@ -91,7 +91,8 @@ public class AdvCpuSelectionList implements ICompositeWidget {
 
             // Show the amount of storage in the Crafting CPU
             tooltipLines.add(ButtonToolTips.CpuStatusStorage.text(Tooltips.ofBytes(cpu.storage()))
-                    // Vanilla text formatting is broken and inherits the color of the 1st placeholder in the text
+                    // Vanilla text formatting is broken and inherits the color of the 1st placeholder in
+                    // the text
                     .withStyle(ChatFormatting.GRAY));
 
             // Show if the CPU is player or automation only

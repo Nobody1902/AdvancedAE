@@ -98,7 +98,8 @@ public class PortableWorkbenchMenu extends UpgradeableMenu<PortableCellWorkbench
 
     @Override
     protected void setupUpgrades() {
-        // We support up to 8 upgrade slots, see ICellWorkbenchItem, but we need to pre-create all slots here
+        // We support up to 8 upgrade slots, see ICellWorkbenchItem, but we need to pre-create all slots
+        // here
         // while the active number of slots changes depending on the item inserted
         var upgradeInventory = new SupplierInternalInventory(this::getCachedUpgrades);
         for (int i = 0; i < 8; i++) {

@@ -64,9 +64,7 @@ import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.InternalInventoryHost;
 import appeng.util.inv.PlayerInternalInventory;
 
-/**
- * Shared code between the pattern provider block and part.
- */
+/** Shared code between the pattern provider block and part. */
 public class AdvPatternProviderLogic implements InternalInventoryHost, ICraftingProvider {
     private static final Logger LOGGER = LoggerFactory.getLogger(AdvPatternProviderLogic.class);
 
@@ -90,9 +88,11 @@ public class AdvPatternProviderLogic implements InternalInventoryHost, ICrafting
     // Pattern storing logic
     private final AppEngInternalInventory patternInventory;
     private final List<IPatternDetails> patterns = new ArrayList<>();
+
     /**
-     * Keeps track of the inputs of all the patterns. When blocking mode is enabled, if any of these is contained in the
-     * target, the pattern won't be pushed. Always contains keys with the secondary component dropped.
+     * Keeps track of the inputs of all the patterns. When blocking mode is enabled, if any of these
+     * is contained in the target, the pattern won't be pushed. Always contains keys with the
+     * secondary component dropped.
      */
     private final Set<AEKey> patternInputs = new HashSet<>();
 
@@ -351,9 +351,7 @@ public class AdvPatternProviderLogic implements InternalInventoryHost, ICrafting
         return this.priority;
     }
 
-    /**
-     * Apply round-robin to list.
-     */
+    /** Apply round-robin to list. */
     private <T> void rearrangeRoundRobin(List<T> list) {
         if (list.isEmpty()) {
             return;
@@ -537,7 +535,8 @@ public class AdvPatternProviderLogic implements InternalInventoryHost, ICrafting
     }
 
     /**
-     * @return Null if {@linkplain #getCraftingLockedReason()} is not {@link LockCraftingMode#LOCK_UNTIL_RESULT}.
+     * @return Null if {@linkplain #getCraftingLockedReason()} is not {@link
+     *     LockCraftingMode#LOCK_UNTIL_RESULT}.
      */
     @Nullable
     public GenericStack getUnlockStack() {
@@ -547,7 +546,8 @@ public class AdvPatternProviderLogic implements InternalInventoryHost, ICrafting
     private Set<Direction> getActiveSides() {
         var sides = host.getTargets();
 
-        // Skip sides with grid connections to other pattern providers and to interfaces connected to the same network
+        // Skip sides with grid connections to other pattern providers and to interfaces connected to
+        // the same network
         var node = mainNode.getNode();
         if (node != null) {
             for (var entry : node.getInWorldConnections().entrySet()) {
@@ -864,8 +864,8 @@ public class AdvPatternProviderLogic implements InternalInventoryHost, ICrafting
     }
 
     /**
-     * @return Gets the name used to show this pattern provider in the
-     * {@link appeng.menu.implementations.PatternAccessTermMenu}.
+     * @return Gets the name used to show this pattern provider in the {@link
+     *     appeng.menu.implementations.PatternAccessTermMenu}.
      */
     public PatternContainerGroup getTerminalGroup() {
         var host = this.host.getBlockEntity();

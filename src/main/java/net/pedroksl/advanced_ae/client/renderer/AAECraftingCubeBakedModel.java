@@ -184,7 +184,8 @@ abstract class AAECraftingCubeBakedModel implements IDynamicBakedModel {
     }
 
     /**
-     * Adds a 3x3x3 corner cap to the cube builder if there are no adjacent crafting cubes on that corner.
+     * Adds a 3x3x3 corner cap to the cube builder if there are no adjacent crafting cubes on that
+     * corner.
      */
     private void addCornerCap(
             CubeBuilder builder,

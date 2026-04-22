@@ -47,9 +47,10 @@ public class QuantumCrafterTermMenu extends AEBaseMenu {
     private static long inventorySerial = Long.MIN_VALUE;
     private final Map<AutoCraftingContainer, ContainerTracker> diList = new IdentityHashMap<>();
     private final Long2ObjectOpenHashMap<ContainerTracker> byId = new Long2ObjectOpenHashMap<>();
+
     /**
-     * Tracks hosts that were visible before, even if they no longer match the filter. For
-     * {@link ShowQuantumCrafters#NOT_FULL}.
+     * Tracks hosts that were visible before, even if they no longer match the filter. For {@link
+     * ShowQuantumCrafters#NOT_FULL}.
      */
     private final Set<AutoCraftingContainer> pinnedHosts = Collections.newSetFromMap(new IdentityHashMap<>());
 

@@ -169,7 +169,8 @@ public class StockExportBusPart extends ExportBusPart implements ISubMenuHost {
 
     private void attemptCrafting(
             StackTransferContext context, ICraftingService cg, int slotToExport, AEKey what, long targetAmount) {
-        // don't bother crafting / checking or result, if target cannot accept at least 1 of requested item
+        // don't bother crafting / checking or result, if target cannot accept at least 1 of requested
+        // item
         var maxAmount = (long) context.getOperationsRemaining() * what.getAmountPerOperation();
 
         var currentAmount = getCurrentStock(what);

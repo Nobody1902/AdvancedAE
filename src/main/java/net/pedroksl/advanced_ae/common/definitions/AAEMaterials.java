@@ -94,9 +94,7 @@ public enum AAEMaterials implements StringRepresentable, ArmorMaterial {
         return this.toughness;
     }
 
-    /**
-     * Gets the percentage of knockback resistance provided by armor of the material.
-     */
+    /** Gets the percentage of knockback resistance provided by armor of the material. */
     public float getKnockbackResistance() {
         return this.knockbackResistance;
     }

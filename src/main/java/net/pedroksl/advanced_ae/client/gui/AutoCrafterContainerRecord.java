@@ -7,25 +7,26 @@ import net.pedroksl.advanced_ae.common.helpers.AutoCraftingContainer;
 import appeng.util.inv.AppEngInternalInventory;
 
 /**
- * This class is used on the client-side to represent a pattern provider and it's inventory as it is shown in the
- * {@link QuantumCrafterTermScreen}'s table.
+ * This class is used on the client-side to represent a pattern provider and it's inventory as it is
+ * shown in the {@link QuantumCrafterTermScreen}'s table.
  */
 public class AutoCrafterContainerRecord implements Comparable<AutoCrafterContainerRecord> {
 
     /**
-     * Identifier for this quantum crafter  on the server-side. See {@link QuantumCrafterTermScreen}
+     * Identifier for this quantum crafter on the server-side. See {@link QuantumCrafterTermScreen}
      */
     private final long serverId;
 
-    // The client-side representation of the machine's inventory, which is only used for display purposes
+    // The client-side representation of the machine's inventory, which is only used for display
+    // purposes
     private final AppEngInternalInventory inventory;
 
     private final Int2BooleanArrayMap enabledArray;
     private final Int2BooleanArrayMap invalidArray;
 
     /**
-     * Used to sort this record in the pattern access terminal's table, comes from
-     * {@link AutoCraftingContainer#getTerminalSortOrder()}
+     * Used to sort this record in the pattern access terminal's table, comes from {@link
+     * AutoCraftingContainer#getTerminalSortOrder()}
      */
     private final long order;
 

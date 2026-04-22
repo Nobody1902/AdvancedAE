@@ -422,7 +422,8 @@ public class AdvCraftingCPUCluster implements IAECluster {
     }
 
     /**
-     * Checks if this CPU cluster can be automatically selected for a crafting request by the given action source.
+     * Checks if this CPU cluster can be automatically selected for a crafting request by the given
+     * action source.
      */
     public boolean canBeAutoSelectedFor(IActionSource source) {
         return switch (getSelectionMode()) {
@@ -432,9 +433,7 @@ public class AdvCraftingCPUCluster implements IAECluster {
         };
     }
 
-    /**
-     * Checks if this CPU cluster is preferred for crafting requests by the given action source.
-     */
+    /** Checks if this CPU cluster is preferred for crafting requests by the given action source. */
     public boolean isPreferredFor(IActionSource source) {
         return switch (getSelectionMode()) {
             case ANY -> false;

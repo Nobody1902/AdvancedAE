@@ -25,8 +25,8 @@ import appeng.crafting.pattern.EncodedPatternItem;
 import appeng.menu.slot.AppEngSlot;
 
 /**
- * This slot is used in the {@link QuantumCrafterTermScreen} to interact with the internal inventory of pattern
- * providers.
+ * This slot is used in the {@link QuantumCrafterTermScreen} to interact with the internal inventory
+ * of pattern providers.
  */
 public class PatternSlot extends AppEngSlot {
 
@@ -62,7 +62,8 @@ public class PatternSlot extends AppEngSlot {
         return this.machineInv;
     }
 
-    // The following methods are overridden to prevent client-side code from messing with the stack in the slot
+    // The following methods are overridden to prevent client-side code from messing with the stack in
+    // the slot
     // Any interaction with the real content of this slot must go via a custom packet
     @Override
     public final boolean mayPlace(ItemStack stack) {

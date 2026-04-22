@@ -82,7 +82,8 @@ public class PortableCellWorkbench implements InternalInventoryHost {
                     } else {
                         // Copy config inventory -> cell, when cell's config is empty
                         copy(this.host.getConfig(), configInventory);
-                        // Copy items back. The cell may change the items on insert, for example if a fluid tank gets
+                        // Copy items back. The cell may change the items on insert, for example if a fluid tank
+                        // gets
                         // turned
                         // into a dummy fluid item.
                         copy(configInventory, this.host.getConfig());
@@ -114,7 +115,8 @@ public class PortableCellWorkbench implements InternalInventoryHost {
             var c = this.getCellConfigInventory();
             if (c != null) {
                 copy(this.host.getConfig(), c);
-                // Copy items back. The cell may change the items on insert, for example if a fluid tank gets turned
+                // Copy items back. The cell may change the items on insert, for example if a fluid tank
+                // gets turned
                 // into a dummy fluid item.
                 copy(c, this.host.getConfig());
             }

@@ -41,23 +41,18 @@ public class AdvCraftingCPULogic {
 
     final AdvCraftingCPU cpu;
 
-    /**
-     * Current job.
-     */
+    /** Current job. */
     private ExecutingCraftingJob job = null;
-    /**
-     * Inventory.
-     */
+
+    /** Inventory. */
     private final ListCraftingInventory inventory = new ListCraftingInventory(AdvCraftingCPULogic.this::postChange);
-    /**
-     * Used crafting operations over the last 3 ticks.
-     */
+
+    /** Used crafting operations over the last 3 ticks. */
     private final int[] usedOps = new int[3];
 
     private final Set<Consumer<AEKey>> listeners = new HashSet<>();
-    /**
-     * True if the CPU is currently trying to clear its inventory but is not able to.
-     */
+
+    /** True if the CPU is currently trying to clear its inventory but is not able to. */
     private boolean cantStoreItems = false;
 
     private long lastModifiedOnTick = TickHandler.instance().getCurrentTick();
@@ -97,7 +92,8 @@ public class AdvCraftingCPULogic {
 
         notifyJobOwner(job, CraftingJobStatusPacket.Status.STARTED);
 
-        // Non-standalone jobs need another link for the requester, and both links need to be submitted to the cache.
+        // Non-standalone jobs need another link for the requester, and both links need to be submitted
+        // to the cache.
         if (requester != null) {
             var linkReq = new CraftingLink(CraftingCpuHelper.generateLinkData(craftId, false, true), requester);
 
@@ -239,12 +235,14 @@ public class AdvCraftingCPULogic {
     }
 
     /**
-     * Called by the CraftingService with an Integer.MAX_VALUE priority to inject items that are being waited for.
+     * Called by the CraftingService with an Integer.MAX_VALUE priority to inject items that are being
+     * waited for.
      *
      * @return Consumed amount.
      */
     public long insert(AEKey what, long amount, Actionable type) {
-        // also stop accepting items when the job is complete, i.e. to prevent re-insertion when pushing out
+        // also stop accepting items when the job is complete, i.e. to prevent re-insertion when pushing
+        // out
         // items during storeItems
         if (what == null || job == null) return 0;
 
@@ -273,12 +271,16 @@ public class AdvCraftingCPULogic {
             // Note: we ignore any remainder (could be the entire input if there is no requester),
             // we already marked the items as done, and we might even finish the job.
 
-            // This means that the job can be marked as finished even if some items were not actually inserted.
-            // In some cases, repeated failed inserts of a fraction of the final output might prevent some recipes from
+            // This means that the job can be marked as finished even if some items were not actually
+            // inserted.
+            // In some cases, repeated failed inserts of a fraction of the final output might prevent some
+            // recipes from
             // being pushed.
-            // TODO: Look into fixing this, perhaps we could use the network monitor to check how much was really
+            // TODO: Look into fixing this, perhaps we could use the network monitor to check how much was
+            // really
             // TODO: inserted into the network.
-            // TODO: Another solution is to wait until all recipes have been pushed before cancelling the job.
+            // TODO: Another solution is to wait until all recipes have been pushed before cancelling the
+            // job.
 
             if (type == Actionable.MODULATE) {
                 // Update count and displayed CPU stack, and finish the job if possible.
@@ -334,9 +336,7 @@ public class AdvCraftingCPULogic {
         this.storeItems();
     }
 
-    /**
-     * Cancel the current job.
-     */
+    /** Cancel the current job. */
     public void cancel() {
         // No job to cancel :P
         if (job == null) return;
@@ -347,9 +347,7 @@ public class AdvCraftingCPULogic {
         finishJob(false);
     }
 
-    /**
-     * Tries to dump all locally stored items back into the storage network.
-     */
+    /** Tries to dump all locally stored items back into the storage network. */
     public void storeItems() {
         Preconditions.checkState(job == null, "CPU should not have a job to prevent re-insertion when dumping items");
         // Short-circuit if there is nothing to do.
@@ -364,7 +362,8 @@ public class AdvCraftingCPULogic {
             this.postChange(entry.getKey());
             var inserted = storage.insert(entry.getKey(), entry.getLongValue(), Actionable.MODULATE, cpu.getSrc());
 
-            // The network was unable to receive all of the items, i.e. no or not enough storage space left
+            // The network was unable to receive all of the items, i.e. no or not enough storage space
+            // left
             entry.setValue(entry.getLongValue() - inserted);
         }
         this.inventory.list.removeZeros();
@@ -433,8 +432,9 @@ public class AdvCraftingCPULogic {
     }
 
     /**
-     * Register a listener that will receive stacks when either the stored items, await items or pending outputs change.
-     * This is only used by the menu. Make sure to remove it by calling {@link #removeListener}.
+     * Register a listener that will receive stacks when either the stored items, await items or
+     * pending outputs change. This is only used by the menu. Make sure to remove it by calling {@link
+     * #removeListener}.
      */
     public void addListener(Consumer<AEKey> listener) {
         listeners.add(listener);
@@ -477,9 +477,7 @@ public class AdvCraftingCPULogic {
         return count;
     }
 
-    /**
-     * Used by the menu to gather all the kinds of stored items.
-     */
+    /** Used by the menu to gather all the kinds of stored items. */
     public void getAllItems(KeyCounter out) {
         out.addAll(this.inventory.list);
         if (this.job != null) {

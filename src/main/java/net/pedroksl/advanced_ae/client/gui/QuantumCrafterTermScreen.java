@@ -53,19 +53,13 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
     private static final int GUI_FOOTER_HEIGHT = 97;
     private static final int COLUMNS = 9;
 
-    /**
-     * Additional margin in pixel for a text row inside the scrolling box.
-     */
+    /** Additional margin in pixel for a text row inside the scrolling box. */
     private static final int PATTERN_PROVIDER_NAME_MARGIN_X = 2;
 
-    /**
-     * The maximum length for the string of a text row in pixel.
-     */
+    /** The maximum length for the string of a text row in pixel. */
     private static final int TEXT_MAX_WIDTH = 155;
 
-    /**
-     * Height of a table-row in pixels.
-     */
+    /** Height of a table-row in pixels. */
     private static final int ROW_HEIGHT = 18;
 
     /**
@@ -175,7 +169,8 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
                     }
                     configMap.forEach((key, value) -> setVisibility(value, true));
                 } else if (row instanceof SlotsRow slotsRow) {
-                    // Note: We have to shift everything after the header up by 1 to avoid black line duplication.
+                    // Note: We have to shift everything after the header up by 1 to avoid black line
+                    // duplication.
                     for (int col = 0; col < slotsRow.slots; col++) {
                         var slot = new PatternSlot(
                                 slotsRow.container,
@@ -387,8 +382,8 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
 
     /**
      * Rebuilds the list of pattern providers.
-     * <p>
-     * Respects a search term if present (ignores case) and adding only matching patterns.
+     *
+     * <p>Respects a search term if present (ignores case) and adding only matching patterns.
      */
     private void refreshList() {
         this.records.clear();
@@ -468,9 +463,7 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
         this.resetScrollbar();
     }
 
-    /**
-     * Should be called whenever this.lines.size() or this.numLines changes.
-     */
+    /** Should be called whenever this.lines.size() or this.numLines changes. */
     private void resetScrollbar() {
         // Needs to take the border into account, so offset for 1 px on the top and bottom.
         scrollbar.setHeight(this.visibleRows * ROW_HEIGHT - 2);
@@ -508,9 +501,9 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
 
     /**
      * Tries to retrieve a cache for a with search term as keyword.
-     * <p>
-     * If this cache should be empty, it will populate it with an earlier cache if available or at least the cache for
-     * the empty string.
+     *
+     * <p>If this cache should be empty, it will populate it with an earlier cache if available or at
+     * least the cache for the empty string.
      *
      * @param searchTerm the corresponding search
      * @return a Set matching a superset of the search term
@@ -573,14 +566,10 @@ public class QuantumCrafterTermScreen<C extends QuantumCrafterTermMenu> extends 
 
     sealed interface Row {}
 
-    /**
-     * A row containing a header for a group.
-     */
+    /** A row containing a header for a group. */
     record ConfigRow(long serverId, int slots) implements Row {}
 
-    /**
-     * A row containing slots for a subset of a pattern container inventory.
-     */
+    /** A row containing slots for a subset of a pattern container inventory. */
     record SlotsRow(AutoCrafterContainerRecord container, int offset, int slots) implements Row {}
 
     record EnabledRow(AutoCrafterContainerRecord container, int offset, int slots) implements Row {}

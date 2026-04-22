@@ -33,9 +33,7 @@ import net.minecraft.nbt.Tag;
 import appeng.api.stacks.AEKey;
 import appeng.api.stacks.GenericStack;
 
-/**
- * Helper functions to work with patterns, mostly related to (de)serialization.
- */
+/** Helper functions to work with patterns, mostly related to (de)serialization. */
 class AdvPatternEncoding {
     private static final String NBT_INPUTS = "in";
     private static final String NBT_OUTPUTS = "out";
